@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=3 uid="uid://bstjqo5gp6noi"]
+
+[ext_resource type="Texture2D" uid="uid://cqejf74ebsjqx" path="res://Assets/Sprites/rockSnowDown.png" id="1_od31d"]
+[ext_resource type="Script" uid="uid://ckfj4n0ne3oy8" path="res://Assets/Scenes/Obstacle/obstacle.gd" id="1_uqp8l"]
+[ext_resource type="Texture2D" uid="uid://dtfi2ha7ihubr" path="res://Assets/Sprites/rockSnow.png" id="2_uqp8l"]
+[ext_resource type="AudioStream" uid="uid://btxwdnahv1gc" path="res://Assets/Audio/sfx_hit.wav" id="4_je534"]
+[ext_resource type="AudioStream" uid="uid://c6ebci6361y4v" path="res://Assets/Audio/sfx_point.wav" id="5_vslrr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uqp8l"]
+size = Vector2(20, 99)
+
+[node name="Obstacle" type="Node2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_uqp8l")
+
+[node name="Top" type="Area2D" parent="."]
+position = Vector2(0, -250)
+
+[node name="Sprite2D" type="Sprite2D" parent="Top"]
+texture = ExtResource("1_od31d")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Top"]
+polygon = PackedVector2Array(-54, -121, 53, -119, 16, 116, 8, 118)
+
+[node name="Down" type="Area2D" parent="."]
+position = Vector2(0, 75)
+
+[node name="Sprite2D" type="Sprite2D" parent="Down"]
+texture = ExtResource("2_uqp8l")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Down"]
+polygon = PackedVector2Array(9, -119, 15, -119, 55, 120, -53, 118)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(67, -89.75)
+scale = Vector2(1, 4.025)
+
+[node name="Score" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Score"]
+position = Vector2(44.5, -88)
+shape = SubResource("RectangleShape2D_uqp8l")
+debug_color = Color(0.706473, 0.488152, 0.0122993, 0.42)
+
+[node name="Hit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_je534")
+bus = &"SFX"
+
+[node name="Score2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_vslrr")
+bus = &"SFX"
+
+[connection signal="body_entered" from="Top" to="." method="on_area_entered"]
+[connection signal="body_entered" from="Down" to="." method="on_area_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="body_entered" from="Score" to="." method="_on_score_body_entered"]

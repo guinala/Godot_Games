@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://bdxgjho81dncy"]
+
+[ext_resource type="Script" uid="uid://cvbi44r5gpreb" path="res://Assets/Scenes/Player/player.gd" id="1_3b2lm"]
+[ext_resource type="Texture2D" uid="uid://q0cghfj8gn7n" path="res://Assets/Sprites/Planes/planeRed1.png" id="2_340hg"]
+[ext_resource type="Texture2D" uid="uid://wcfvmyu4tg8j" path="res://Assets/Sprites/Planes/planeRed2.png" id="3_wp0h6"]
+[ext_resource type="Texture2D" uid="uid://l1m1yptx56t" path="res://Assets/Sprites/Planes/planeRed3.png" id="4_fg6bc"]
+[ext_resource type="AudioStream" uid="uid://dwmtu5w1krorr" path="res://Assets/Audio/sfx_wing.wav" id="5_340hg"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kvviq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_340hg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_wp0h6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_fg6bc")
+}],
+"loop": true,
+"name": &"Fly",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_340hg")
+}],
+"loop": false,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7h7ca"]
+radius = 37.4833
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_3b2lm")
+jump_force = 320.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_kvviq")
+animation = &"Idle"
+autoplay = "Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7h7ca")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_340hg")
+bus = &"SFX"
