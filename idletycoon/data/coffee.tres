@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://scfchp048e1i"]
+
+[ext_resource type="Script" uid="uid://cbykxroi1ikth" path="res://data/item.gd" id="1_752wm"]
+[ext_resource type="Texture2D" uid="uid://bkyflxlsl2igp" path="res://Idle+Tycoon+Assets/Idle Assets/Sprites/UI/Coffee.png" id="2_regsm"]
+
+[resource]
+script = ExtResource("1_752wm")
+id = "Coffee"
+type = 0
+sprite = ExtResource("2_regsm")
+cook_time = 6.0
+cook_time_reduce_perc = 0.8
+upgrade_cost = 3.0
+upgrade_mult = 1.3
+profit = 4.0
+profit_mult = 1.2
+metadata/_custom_type_script = "uid://cbykxroi1ikth"

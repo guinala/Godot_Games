@@ -1,0 +1,167 @@
+[gd_scene load_steps=10 format=3 uid="uid://c7fk5n45110oy"]
+
+[ext_resource type="Script" uid="uid://b4p7oltcvf2up" path="res://Scenes/Cashier/cashier.gd" id="1_tuhtq"]
+[ext_resource type="Texture2D" uid="uid://bjbbc4seu86vy" path="res://Idle+Tycoon+Assets/Idle Assets/Sprites/shadow.png" id="2_h4ya4"]
+[ext_resource type="Texture2D" uid="uid://vukrm1i8u07n" path="res://Idle+Tycoon+Assets/Idle Assets/Sprites/Characters/blue_body_square.png" id="3_yvays"]
+[ext_resource type="Texture2D" uid="uid://jf60677t635w" path="res://Idle+Tycoon+Assets/Idle Assets/Sprites/Characters/face_a.png" id="4_6loi2"]
+[ext_resource type="Texture2D" uid="uid://ctjsioplj2qsa" path="res://Idle+Tycoon+Assets/Idle Assets/Sprites/Characters/blue_hand_closed.png" id="5_f7mjt"]
+
+[sub_resource type="Animation" id="Animation_arqwe"]
+resource_name = "Idle"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/HandRight:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(64, 23), Vector2(64, 10)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/HandLeft:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-65, 23), Vector2(-65, 10)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/Face:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 3.5)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visuals:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_kmvpe"]
+resource_name = "Move"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.9, 1.1), Vector2(1.1, 0.9)]
+}
+
+[sub_resource type="Animation" id="Animation_0hqgn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/Face:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/HandLeft:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-65, 23)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/HandRight:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(64, 23)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visuals:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gjaj4"]
+_data = {
+&"Idle": SubResource("Animation_arqwe"),
+&"Move": SubResource("Animation_kmvpe"),
+&"RESET": SubResource("Animation_0hqgn")
+}
+
+[node name="Cashier" type="Node2D"]
+script = ExtResource("1_tuhtq")
+
+[node name="Visuals" type="Node2D" parent="."]
+
+[node name="Shadow" type="Sprite2D" parent="Visuals"]
+modulate = Color(1, 1, 1, 0.54902)
+position = Vector2(0, 40)
+texture = ExtResource("2_h4ya4")
+
+[node name="Body" type="Sprite2D" parent="Visuals"]
+texture = ExtResource("3_yvays")
+
+[node name="Face" type="Sprite2D" parent="Visuals"]
+texture = ExtResource("4_6loi2")
+
+[node name="HandLeft" type="Sprite2D" parent="Visuals"]
+position = Vector2(-65, 23)
+rotation = -3.14159
+texture = ExtResource("5_f7mjt")
+
+[node name="HandRight" type="Sprite2D" parent="Visuals"]
+position = Vector2(64, 23)
+scale = Vector2(1, -1)
+texture = ExtResource("5_f7mjt")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_gjaj4")
+}
+autoplay = "Idle"

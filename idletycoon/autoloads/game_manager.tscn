@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3 uid="uid://qvlfj0tr1hor"]
+
+[ext_resource type="Script" uid="uid://b2mjcgqyrqoyt" path="res://autoloads/game_manager.gd" id="1_3ovu6"]
+[ext_resource type="Resource" uid="uid://scfchp048e1i" path="res://data/coffee.tres" id="2_es8io"]
+[ext_resource type="Resource" uid="uid://b1hgtwkqgu15n" path="res://data/item_burger.tres" id="3_qaqf1"]
+
+[node name="GameManager" type="Node"]
+script = ExtResource("1_3ovu6")
+coffee = ExtResource("2_es8io")
+burger = ExtResource("3_qaqf1")
