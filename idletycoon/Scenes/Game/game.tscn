@@ -1,9 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://cw4thxmipjjku"]
+[gd_scene load_steps=17 format=3 uid="uid://cw4thxmipjjku"]
 
 [ext_resource type="Texture2D" uid="uid://df0gnmon7gwon" path="res://Idle+Tycoon+Assets/Idle Assets/Sprites/Fondo.png" id="1_qikps"]
 [ext_resource type="Texture2D" uid="uid://codl1em0t7g3a" path="res://Idle+Tycoon+Assets/Idle Assets/Sprites/Counter.png" id="2_i1e5p"]
 [ext_resource type="Texture2D" uid="uid://d3crom8hunfy1" path="res://Idle+Tycoon+Assets/Idle Assets/Sprites/Counter_half.png" id="3_ciybh"]
+[ext_resource type="Texture2D" uid="uid://bkyflxlsl2igp" path="res://Idle+Tycoon+Assets/Idle Assets/Sprites/UI/Coffee.png" id="4_56qi8"]
 [ext_resource type="PackedScene" uid="uid://c7fk5n45110oy" path="res://Scenes/Cashier/cashier.tscn" id="4_i1e5p"]
+[ext_resource type="Texture2D" uid="uid://dta8k1m0wggvp" path="res://Idle+Tycoon+Assets/Idle Assets/Sprites/UI/Burger.png" id="5_2vowc"]
 [ext_resource type="Script" uid="uid://bja3rgojnncbr" path="res://Managers/customer_manager.gd" id="5_ciybh"]
 [ext_resource type="Script" uid="uid://ds21qpxpsssrg" path="res://data/customer_data.gd" id="6_qtymf"]
 [ext_resource type="Resource" uid="uid://8b3tjuowh47d" path="res://data/customer_data_green.tres" id="7_ypmwd"]
@@ -13,6 +15,7 @@
 [ext_resource type="Resource" uid="uid://3en01exxd64t" path="res://data/customer_data_yellow.tres" id="11_56qi8"]
 [ext_resource type="PackedScene" uid="uid://rp0ygarvdjij" path="res://Scenes/Customer/customer.tscn" id="12_ypmwd"]
 [ext_resource type="Script" uid="uid://cv6j7ml4v5t86" path="res://Managers/counter_manager.gd" id="13_oejk7"]
+[ext_resource type="Script" uid="uid://che6kaw0rfre8" path="res://Managers/cashier_manager.gd" id="13_upfqs"]
 
 [node name="Game" type="Node2D"]
 
@@ -30,13 +33,20 @@ position = Vector2(417, 1382)
 scale = Vector2(0.8, 0.9)
 texture = ExtResource("3_ciybh")
 
+[node name="Sprite2D" type="Sprite2D" parent="CoffeeCounter"]
+position = Vector2(-81.25, -60)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("4_56qi8")
+
 [node name="BurgerCounter" type="Sprite2D" parent="."]
 position = Vector2(657, 1382)
 scale = Vector2(0.8, 0.9)
 texture = ExtResource("3_ciybh")
 
-[node name="Cashier" parent="." instance=ExtResource("4_i1e5p")]
-position = Vector2(544, 1152)
+[node name="Sprite2D" type="Sprite2D" parent="BurgerCounter"]
+position = Vector2(-62.5, -46.6667)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("5_2vowc")
 
 [node name="CustomerManager" type="Node" parent="." node_paths=PackedStringArray("spawn_positions")]
 script = ExtResource("5_ciybh")
@@ -70,5 +80,14 @@ position = Vector2(586.785, 752)
 
 [node name="Marker2D4" type="Marker2D" parent="CounterManager"]
 position = Vector2(685.675, 752)
+
+[node name="CashierManager" type="Node" parent="." node_paths=PackedStringArray("spawn_pos")]
+script = ExtResource("13_upfqs")
+cashier_scene = ExtResource("4_i1e5p")
+spawn_pos = NodePath("SpawnPosition")
+
+[node name="SpawnPosition" type="Marker2D" parent="CashierManager"]
+position = Vector2(519, 1086)
+rotation = 1.5708
 
 [connection signal="timeout" from="CustomerManager/Timer" to="CustomerManager" method="_on_timer_timeout"]
