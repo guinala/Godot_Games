@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dn8i0twveo1wo"]
+
+[ext_resource type="Texture2D" uid="uid://dk27akamgg26o" path="res://Idle+Tycoon+Assets/Idle Assets/Sprites/UI/coin_gold.png" id="1_oibhb"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pwoji"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_max = 180.0
+gravity = Vector3(0, 98, 0)
+scale_min = 0.5
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+z_index = 1
+emitting = false
+texture = ExtResource("1_oibhb")
+lifetime = 0.4
+one_shot = true
+speed_scale = 2.0
+process_material = SubResource("ParticleProcessMaterial_pwoji")

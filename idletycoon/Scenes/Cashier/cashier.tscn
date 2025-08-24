@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://c7fk5n45110oy"]
+[gd_scene load_steps=11 format=3 uid="uid://c7fk5n45110oy"]
 
 [ext_resource type="Script" uid="uid://b4p7oltcvf2up" path="res://Scenes/Cashier/cashier.gd" id="1_tuhtq"]
 [ext_resource type="Texture2D" uid="uid://bjbbc4seu86vy" path="res://Idle+Tycoon+Assets/Idle Assets/Sprites/shadow.png" id="2_h4ya4"]
 [ext_resource type="Texture2D" uid="uid://vukrm1i8u07n" path="res://Idle+Tycoon+Assets/Idle Assets/Sprites/Characters/blue_body_square.png" id="3_yvays"]
 [ext_resource type="Texture2D" uid="uid://jf60677t635w" path="res://Idle+Tycoon+Assets/Idle Assets/Sprites/Characters/face_a.png" id="4_6loi2"]
 [ext_resource type="Texture2D" uid="uid://ctjsioplj2qsa" path="res://Idle+Tycoon+Assets/Idle Assets/Sprites/Characters/blue_hand_closed.png" id="5_f7mjt"]
+[ext_resource type="PackedScene" uid="uid://2780wbyt63i3" path="res://Scenes/cook_bar.tscn" id="6_h4ya4"]
 
 [sub_resource type="Animation" id="Animation_arqwe"]
 resource_name = "Idle"
@@ -165,3 +166,12 @@ libraries = {
 &"": SubResource("AnimationLibrary_gjaj4")
 }
 autoplay = "Idle"
+
+[node name="Control" parent="." instance=ExtResource("6_h4ya4")]
+visible = false
+offset_left = -64.0
+offset_top = -190.0
+offset_right = -64.0
+offset_bottom = -190.0
+
+[connection signal="on_cook_completed" from="Control" to="." method="_on_control_on_cook_completed"]

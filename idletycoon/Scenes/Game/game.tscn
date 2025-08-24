@@ -90,4 +90,7 @@ spawn_pos = NodePath("SpawnPosition")
 position = Vector2(519, 1086)
 rotation = 1.5708
 
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(425, 1250)
+
 [connection signal="timeout" from="CustomerManager/Timer" to="CustomerManager" method="_on_timer_timeout"]
