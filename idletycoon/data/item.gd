@@ -1,6 +1,8 @@
 extends Resource
 class_name Item
 
+signal on_star_reached
+
 enum ItemType {Coffee, Burger}
 
 @export var id: String
@@ -17,8 +19,22 @@ enum ItemType {Coffee, Burger}
 
 @export_group("Profit")
 @export var profit := 4.0
-@export var profit_mult := 4.0
+@export var profit_mult := 1.2
 
 var max_level := 75
 
 var current_level := 0
+
+func update_item() -> void:
+	if current_level >= max_level:
+		return
+	
+	current_level += 1
+	upgrade_cost = ceil(upgrade_cost*upgrade_mult)
+	profit = ceil(profit*profit_mult)
+	if current_level % 25 == 0:
+		cook_time = ceil(cook_time*cook_time_reduce_perc)
+		upgrade_cost *= 3
+		profit *= 3
+		on_star_reached.emit()
+		

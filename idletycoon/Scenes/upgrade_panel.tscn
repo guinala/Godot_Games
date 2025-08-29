@@ -203,6 +203,7 @@ text = "10"
 label_settings = ExtResource("1_4kt86")
 
 [node name="Button" type="Button" parent="Panel"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 75)
 layout_mode = 1
 anchors_preset = 7
@@ -219,3 +220,5 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_egla8")
 text = "50"
+
+[connection signal="pressed" from="Panel/Button" to="." method="_on_button_pressed"]
