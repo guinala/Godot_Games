@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cw4thxmipjjku"]
+[gd_scene load_steps=36 format=3 uid="uid://cw4thxmipjjku"]
 
 [ext_resource type="Texture2D" uid="uid://df0gnmon7gwon" path="res://Idle+Tycoon+Assets/Idle Assets/Sprites/Fondo.png" id="1_qikps"]
 [ext_resource type="Texture2D" uid="uid://codl1em0t7g3a" path="res://Idle+Tycoon+Assets/Idle Assets/Sprites/Counter.png" id="2_i1e5p"]
@@ -21,7 +21,9 @@
 [ext_resource type="Texture2D" uid="uid://cr1kgqyannl2a" path="res://Idle+Tycoon+Assets/Idle Assets/Sprites/UI/Arrow.png" id="19_lemb1"]
 [ext_resource type="Texture2D" uid="uid://dk27akamgg26o" path="res://Idle+Tycoon+Assets/Idle Assets/Sprites/UI/coin_gold.png" id="20_nxex1"]
 [ext_resource type="FontFile" uid="uid://due6jbyye53ld" path="res://Idle+Tycoon+Assets/Idle Assets/Fonts/font_score.ttf" id="21_pa3qg"]
+[ext_resource type="Texture2D" uid="uid://d1b50b5xsltvf" path="res://Idle+Tycoon+Assets/Idle Assets/Sprites/UI/arrowUp.png" id="22_2lc0x"]
 [ext_resource type="Texture2D" uid="uid://jf60677t635w" path="res://Idle+Tycoon+Assets/Idle Assets/Sprites/Characters/face_a.png" id="22_pa3qg"]
+[ext_resource type="Texture2D" uid="uid://dkwe21plt3h27" path="res://Idle+Tycoon+Assets/Idle Assets/Sprites/UI/gear.png" id="23_4ti5a"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2lc0x"]
 font = ExtResource("21_pa3qg")
@@ -52,6 +54,27 @@ font_color = Color(0, 0, 0, 1)
 bg_color = Color(0.552956, 0.552956, 0.552955, 1)
 shadow_size = 1
 shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ti5a"]
+bg_color = Color(0.114897, 0.114897, 0.114897, 1)
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_7pdpw"]
+font = ExtResource("21_pa3qg")
+font_size = 45
+
+[sub_resource type="LabelSettings" id="LabelSettings_pmm7v"]
+font = ExtResource("21_pa3qg")
+font_size = 45
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3gqeb"]
+bg_color = Color(0.251807, 0.545322, 0.281522, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7pdpw"]
+bg_color = Color(0.21116, 0.532011, 0.486786, 1)
 
 [node name="Game" type="Node2D"]
 
@@ -204,7 +227,53 @@ layout_mode = 2
 text = "0"
 label_settings = SubResource("LabelSettings_2lc0x")
 
+[node name="BottomBar" type="Panel" parent="UI"]
+custom_minimum_size = Vector2(0, 96)
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="TextureButton" type="TextureButton" parent="UI/BottomBar"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -105.0
+offset_top = -40.0
+offset_right = -25.0
+offset_bottom = 40.0
+grow_horizontal = 0
+grow_vertical = 2
+texture_normal = ExtResource("22_2lc0x")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="TextureButton2" type="TextureButton" parent="UI/BottomBar"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -201.0
+offset_top = -40.0
+offset_right = -121.0
+offset_bottom = 40.0
+grow_horizontal = 0
+grow_vertical = 2
+texture_normal = ExtResource("23_4ti5a")
+ignore_texture_size = true
+stretch_mode = 5
+
 [node name="Shop" type="Panel" parent="UI"]
+visible = false
 custom_minimum_size = Vector2(700, 1000)
 anchors_preset = 8
 anchor_left = 0.5
@@ -532,11 +601,97 @@ theme_override_font_sizes/font_size = 35
 theme_override_styles/normal = SubResource("StyleBoxFlat_pa3qg")
 text = "50"
 
+[node name="Options" type="Panel" parent="UI"]
+visible = false
+custom_minimum_size = Vector2(650, 450)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -325.0
+offset_top = -225.0
+offset_right = 325.0
+offset_bottom = 225.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4ti5a")
+
+[node name="Title" type="Label" parent="UI/Options"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -83.5
+offset_top = 25.0
+offset_right = 83.5
+offset_bottom = 71.0
+grow_horizontal = 2
+text = "OPTIONS"
+label_settings = SubResource("LabelSettings_7pdpw")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Options"]
+custom_minimum_size = Vector2(550, 180)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -275.0
+offset_top = -90.0
+offset_right = 275.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 25
+alignment = 1
+
+[node name="Music" type="HBoxContainer" parent="UI/Options/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/Options/VBoxContainer/Music"]
+layout_mode = 2
+text = "Music"
+label_settings = SubResource("LabelSettings_pmm7v")
+
+[node name="MusicHSlider" type="HSlider" parent="UI/Options/VBoxContainer/Music"]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 1
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_3gqeb")
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="SFX" type="HBoxContainer" parent="UI/Options/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/Options/VBoxContainer/SFX"]
+layout_mode = 2
+text = "SFX"
+label_settings = SubResource("LabelSettings_pmm7v")
+
+[node name="SFXHSlider" type="HSlider" parent="UI/Options/VBoxContainer/SFX"]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 1
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_7pdpw")
+max_value = 1.0
+step = 0.01
+value = 0.5
+
 [connection signal="timeout" from="CustomerManager/Timer" to="CustomerManager" method="_on_timer_timeout"]
 [connection signal="pressed" from="UI/CoffeeButton" to="UI" method="_on_coffee_button_pressed"]
 [connection signal="pressed" from="UI/BurgerButton" to="UI" method="_on_burger_button_pressed"]
+[connection signal="pressed" from="UI/BottomBar/TextureButton" to="UI" method="_on_texture_button_pressed"]
+[connection signal="pressed" from="UI/BottomBar/TextureButton2" to="UI" method="_on_texture_button_2_pressed"]
 [connection signal="pressed" from="UI/Shop/VBoxContainer/NewCashier/NewCashierButton" to="UI" method="_on_new_cashier_button_pressed"]
 [connection signal="pressed" from="UI/Shop/VBoxContainer/FasterCoffee/FasterCoffeeButton" to="UI" method="_on_faster_coffee_button_pressed"]
 [connection signal="pressed" from="UI/Shop/VBoxContainer/FasterBurger/FasterBurgerButton" to="UI" method="_on_faster_burger_button_pressed"]
 [connection signal="pressed" from="UI/Shop/VBoxContainer/NewCashier2/NewCashierButton2" to="UI" method="_on_new_cashier_button_2_pressed"]
 [connection signal="pressed" from="UI/Shop/VBoxContainer/NewCashier3/NewCashierButto3" to="UI" method="_on_new_cashier_butto_3_pressed"]
+[connection signal="value_changed" from="UI/Options/VBoxContainer/Music/MusicHSlider" to="UI" method="_on_music_h_slider_value_changed"]
+[connection signal="value_changed" from="UI/Options/VBoxContainer/SFX/SFXHSlider" to="UI" method="_on_sfxh_slider_value_changed"]

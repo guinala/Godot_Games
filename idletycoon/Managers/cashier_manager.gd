@@ -9,6 +9,7 @@ var cashier_list : Array[Cashier] = []
 
 func _ready() -> void:
 	GameManager.on_customer_request.connect(_on_customer_request)
+	GameManager.on_new_cashier.connect(add_cashier)
 	add_cashier()
 
 func add_cashier() -> void:
@@ -22,7 +23,7 @@ func _on_order_completed(cashier: Cashier) -> void:
 	var free_customer : Customer = counter_manager.get_first_available_customer()
 	if free_customer:
 		cashier.set_customer(free_customer)
-		cashier.taker_order()
+		cashier.take_order()
 
 func _on_customer_request(customer:Customer) -> void:
 	var free_cashiers : Array = cashier_list.filter(func(x:Cashier): return x.current_customer == null)
