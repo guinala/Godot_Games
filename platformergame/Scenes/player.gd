@@ -9,6 +9,7 @@ class_name Player
 @onready var visuals: Node2D = $Visuals
 @onready var animated_sprite_2d: AnimatedSprite2D = %AnimatedSprite2D
 @onready var ray_cast_2d: RayCast2D = %RayCast2D
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
 var jumps_left : int 
 var move_direction := 1
@@ -76,3 +77,10 @@ func player_dead() -> void:
 	can_move = false
 	velocity = Vector2.ZERO
 	animated_sprite_2d.play("defeat")
+	collision_shape_2d.set_deferred("disabled", true) 
+	
+func player_respawn() -> void:
+	animated_sprite_2d.play("respawn")
+	await animated_sprite_2d.animation_finished
+	can_move = true
+	collision_shape_2d.set_deferred("disabled", false) 
