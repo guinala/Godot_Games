@@ -50,6 +50,7 @@ func handle_jump_input() -> void:
 func jump() -> void:
 	if jumps_left <= 0:
 		return
+	SoundManager.play_jump()
 	velocity.y = -jump_force
 	jumps_left -= 1
 	if jumps_left <= 0:

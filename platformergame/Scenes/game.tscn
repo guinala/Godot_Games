@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://dhr7b7cduvxye"]
+[gd_scene load_steps=22 format=4 uid="uid://dhr7b7cduvxye"]
 
 [ext_resource type="PackedScene" uid="uid://74x2u58166by" path="res://Scenes/player.tscn" id="1_ebmjs"]
 [ext_resource type="Script" uid="uid://wpdsvotoedqk" path="res://Scenes/game.gd" id="1_i6g32"]
@@ -14,6 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://ced4ch7o1enqp" path="res://moving_rock.tscn" id="11_o5yvi"]
 [ext_resource type="PackedScene" uid="uid://dcvcyt2u00lp0" path="res://Scenes/spike_ball.tscn" id="11_rfjv2"]
 [ext_resource type="PackedScene" uid="uid://dyljllkojsons" path="res://Scenes/checkpoint.tscn" id="12_rku1e"]
+[ext_resource type="PackedScene" uid="uid://tooyix6f58uj" path="res://final_checkpoint.tscn" id="15_nb51f"]
+[ext_resource type="Texture2D" uid="uid://bn7geagmtnstt" path="res://LeapNight Assets/Sprites/Items/Fruits/Fruit.png" id="16_nnt18"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3dryh"]
 shader = ExtResource("1_wrm1d")
@@ -26,6 +28,16 @@ _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -133, -308, 0, 0, 0, 0, 106, -307)
 }
 point_count = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nb51f"]
+bg_color = Color(0.269123, 0.657312, 0.761596, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+
+[sub_resource type="LabelSettings" id="LabelSettings_ewbju"]
+font_size = 40
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_i6g32")
@@ -168,3 +180,65 @@ move_distance = 96.0
 
 [node name="Checkpoint" parent="Floor_4" instance=ExtResource("12_rku1e")]
 position = Vector2(-119, 99)
+
+[node name="FinalCheckpoint" parent="Floor_4" instance=ExtResource("15_nb51f")]
+position = Vector2(117, -77)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="GameWon" type="Panel" parent="UI"]
+visible = false
+custom_minimum_size = Vector2(200, 150)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -75.0
+offset_right = 100.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_nb51f")
+
+[node name="Button" type="Button" parent="UI/GameWon"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "RETRY"
+
+[node name="Control" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Control"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("16_nnt18")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="UI/Control"]
+layout_mode = 0
+offset_left = 44.0
+offset_top = -3.0
+offset_right = 84.0
+offset_bottom = 52.0
+text = "0"
+label_settings = SubResource("LabelSettings_ewbju")
+
+[connection signal="pressed" from="UI/GameWon/Button" to="." method="_on_button_pressed"]

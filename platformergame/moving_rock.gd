@@ -27,4 +27,5 @@ func _on_action_area_body_entered(body: Node2D) -> void:
 func _on_kill_area_body_entered(body: Node2D) -> void:
 	if not body is Player:
 		return
+	SoundManager.play_impact()
 	EventManager.on_player_dead.emit()
