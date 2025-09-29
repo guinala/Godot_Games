@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://74x2u58166by"]
+[gd_scene load_steps=45 format=3 uid="uid://74x2u58166by"]
 
 [ext_resource type="Script" uid="uid://7l472gdsvimu" path="res://Scenes/player.gd" id="1_v0iea"]
 [ext_resource type="Texture2D" uid="uid://cuivmvt2d6rh7" path="res://LeapNight Assets/Sprites/Main Characters/Desappearing (96x96).png" id="2_3smsa"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://boikrdjubpymy" path="res://LeapNight Assets/Sprites/Main Characters/Ninja Frog/Jump (32x32).png" id="5_tx1dd"]
 [ext_resource type="Texture2D" uid="uid://bt41ktfjs1wof" path="res://LeapNight Assets/Sprites/Main Characters/Appearing (96x96).png" id="6_gymyn"]
 [ext_resource type="Texture2D" uid="uid://fxchod5uxwsk" path="res://LeapNight Assets/Sprites/Main Characters/Ninja Frog/Run (32x32).png" id="7_pu2lt"]
+[ext_resource type="Texture2D" uid="uid://dwlvowidl5umk" path="res://VFX/Smoke.png" id="8_8erm5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ukyrk"]
 atlas = ExtResource("2_3smsa")
@@ -273,6 +274,25 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ax3m3"]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_f1ek2"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tx1dd"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+direction = Vector3(-1, 0, 0)
+spread = 0.0
+initial_velocity_min = 20.0
+initial_velocity_max = 50.0
+gravity = Vector3(0, 0, 0)
+damping_min = 20.0
+damping_max = 40.0
+scale_min = 0.5
+scale_max = 0.8
+
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 14
 script = ExtResource("1_v0iea")
@@ -294,3 +314,11 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -15)
 shape = SubResource("CapsuleShape2D_ax3m3")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.647059)
+material = SubResource("CanvasItemMaterial_f1ek2")
+position = Vector2(-13, -5)
+texture = ExtResource("8_8erm5")
+lifetime = 0.3
+process_material = SubResource("ParticleProcessMaterial_tx1dd")

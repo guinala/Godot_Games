@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://b64cneh0uh335"]
+
+[ext_resource type="Script" uid="uid://cuy3lxir3snrb" path="res://scenes/enemy_spawner.gd" id="1_ks1gq"]
+[ext_resource type="PackedScene" uid="uid://d2lgo8wclctfg" path="res://scenes/enemy_1.tscn" id="2_devoi"]
+
+[node name="EnemySpawner" type="Node"]
+script = ExtResource("1_ks1gq")
+min_random = 1.0
+max_random = 2.5
+fixed_timer = 1.5
+enemy_list = Array[PackedScene]([ExtResource("2_devoi")])
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

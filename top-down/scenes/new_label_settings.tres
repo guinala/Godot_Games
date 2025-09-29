@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://hmyhvsayvsuf"]
+
+[ext_resource type="FontFile" uid="uid://c4x0jidjvbcs3" path="res://Topdown+Assets/Topdown Assets/Fonts/kenpixel_mini_square.ttf" id="1_i4hyt"]
+
+[resource]
+font = ExtResource("1_i4hyt")
+font_size = 70

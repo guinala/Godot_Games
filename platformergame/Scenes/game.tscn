@@ -1,10 +1,12 @@
-[gd_scene load_steps=22 format=4 uid="uid://dhr7b7cduvxye"]
+[gd_scene load_steps=32 format=4 uid="uid://dhr7b7cduvxye"]
 
 [ext_resource type="PackedScene" uid="uid://74x2u58166by" path="res://Scenes/player.tscn" id="1_ebmjs"]
 [ext_resource type="Script" uid="uid://wpdsvotoedqk" path="res://Scenes/game.gd" id="1_i6g32"]
 [ext_resource type="Shader" uid="uid://eqgjdkc03lh1" path="res://Shaders/game.gdshader" id="1_wrm1d"]
 [ext_resource type="Texture2D" uid="uid://cdddgnvfb6luy" path="res://LeapNight Assets/Sprites/Background/Blue.png" id="2_3dryh"]
 [ext_resource type="TileSet" uid="uid://bbe5dmp5gnvkt" path="res://game_tile.tres" id="2_qxrlw"]
+[ext_resource type="Texture2D" uid="uid://b7yqp3r1wr7kd" path="res://VFX/Trail.png" id="3_ewbju"]
+[ext_resource type="Texture2D" uid="uid://bdi5v1gqcqyur" path="res://VFX/Leaf.png" id="4_85qyi"]
 [ext_resource type="PackedScene" uid="uid://6dsqlskooiop" path="res://Scenes/spike_block.tscn" id="6_1l0tm"]
 [ext_resource type="PackedScene" uid="uid://bcgy1wabnvs30" path="res://Scenes/fruit_banana.tscn" id="7_1l0tm"]
 [ext_resource type="PackedScene" uid="uid://u3nr5iwkmiyk" path="res://Scenes/custom_path_follow.tscn" id="8_h4fw4"]
@@ -16,6 +18,55 @@
 [ext_resource type="PackedScene" uid="uid://dyljllkojsons" path="res://Scenes/checkpoint.tscn" id="12_rku1e"]
 [ext_resource type="PackedScene" uid="uid://tooyix6f58uj" path="res://final_checkpoint.tscn" id="15_nb51f"]
 [ext_resource type="Texture2D" uid="uid://bn7geagmtnstt" path="res://LeapNight Assets/Sprites/Items/Fruits/Fruit.png" id="16_nnt18"]
+
+[sub_resource type="Curve" id="Curve_85qyi"]
+_data = [Vector2(0, 0.522191), 0.0, 0.0, 0, 0, Vector2(0.503401, 1), 0.0, 0.0, 0, 0, Vector2(0.979592, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_iivbl"]
+curve = SubResource("Curve_85qyi")
+
+[sub_resource type="Curve" id="Curve_7nbq1"]
+_data = [Vector2(0.00340136, 0.0173371), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_exi56"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, -1), 0.0, 0.0, 0, 0, Vector2(0.244898, 1), 0.0, 0.0, 0, 0, Vector2(0.503401, -1), 0.0, 0.0, 0, 0, Vector2(0.748299, 1), 0.0, 0.0, 0, 0, Vector2(1, -1), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_7t8sx"]
+curve_x = SubResource("Curve_7nbq1")
+curve_y = SubResource("Curve_exi56")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mg4q0"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(1, 200, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+initial_velocity_min = 20.0
+initial_velocity_max = 80.0
+directional_velocity_min = 20.0
+directional_velocity_max = 50.0
+directional_velocity_curve = SubResource("CurveXYZTexture_7t8sx")
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 0.8
+alpha_curve = SubResource("CurveTexture_iivbl")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_iivbl"]
+particles_animation = true
+particles_anim_h_frames = 6
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7nbq1"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(10, 500, 1)
+initial_velocity_min = 20.0
+initial_velocity_max = 80.0
+gravity = Vector3(0, 10, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3dryh"]
 shader = ExtResource("1_wrm1d")
@@ -49,6 +100,27 @@ limit_left = 0
 limit_right = 135
 limit_bottom = 140
 script = ExtResource("9_ldgsr")
+
+[node name="Wind" type="GPUParticles2D" parent="Camera2D"]
+z_index = 1
+position = Vector2(-105, 0)
+amount = 15
+texture = ExtResource("3_ewbju")
+lifetime = 5.0
+preprocess = 1.0
+trail_enabled = true
+trail_lifetime = 0.25
+process_material = SubResource("ParticleProcessMaterial_mg4q0")
+
+[node name="Leaf" type="GPUParticles2D" parent="Camera2D"]
+z_index = 1
+material = SubResource("CanvasItemMaterial_iivbl")
+position = Vector2(-131, 0)
+amount = 60
+texture = ExtResource("4_85qyi")
+lifetime = 7.0
+preprocess = 1.0
+process_material = SubResource("ParticleProcessMaterial_7nbq1")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3

@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://nfunj72tyse5"]
+
+[ext_resource type="Script" uid="uid://d17f0ae5pvg77" path="res://scenes/Enemy.gd" id="1_n1jr3"]
+[ext_resource type="Texture2D" uid="uid://b0d6xe0sreis5" path="res://Topdown+Assets/Topdown Assets/Sprites/Shadow.png" id="2_2kb2m"]
+[ext_resource type="PackedScene" uid="uid://bd8oaalr0k5u8" path="res://scenes/health_component.tscn" id="2_sw3va"]
+[ext_resource type="PackedScene" uid="uid://dsx310j4ng4ky" path="res://scenes/health_bar.tscn" id="4_kegi0"]
+
+[node name="BaseEnemy" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_n1jr3")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.505882)
+texture = ExtResource("2_2kb2m")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_sw3va")]
+
+[node name="HitArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="HealthBar" parent="." instance=ExtResource("4_kegi0")]
+offset_left = -65.0
+offset_top = -279.0
+offset_right = -65.0
+offset_bottom = -279.0
+
+[connection signal="on_damaged" from="HealthComponent" to="." method="_on_health_component_on_damaged"]
+[connection signal="on_defeated" from="HealthComponent" to="." method="_on_health_component_on_defeated"]
+[connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_body_entered"]
